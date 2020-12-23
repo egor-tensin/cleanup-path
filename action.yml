@@ -1,0 +1,49 @@
+name: Clean up %PATH%
+description: Clean up PATH environment variable on Windows workers
+
+inputs:
+  dirs:
+    description: Additional paths, separated by a semicolon (;)
+    required: false
+  default:
+    description: Add the default paths
+    required: false
+    default: 1
+
+runs:
+  using: composite
+  steps:
+    - run: |
+        New-Variable os -Value ('${{ runner.os }}') -Option Constant
+
+        New-Variable windows_host -Value ($os -eq 'Windows') -Option Constant
+
+        New-Variable dirs -Value ('${{ inputs.dirs }}') -Option Constant
+        New-Variable default -Value ('${{ inputs.default }}' -eq '1') -Option Constant
+
+        if ($windows_host) {
+          $sep = [IO.Path]::PathSeparator
+
+          $new_path = $dirs.Split($sep, [System.StringSplitOptions]::RemoveEmptyEntries)
+
+          if ($default) {
+              # This seems to be the default on new installations.
+              # Also, MSYS2 does this.
+              $new_path += @(
+                  'C:\Windows\system32',
+                  'C:\Windows',
+                  'C:\Windows\System32\Wbem',
+                  'C:\Windows\System32\WindowsPowerShell\v1.0\'
+              )
+          }
+
+          $new_path = $new_path -join $sep
+          echo "PATH=$new_path" >> $env:GITHUB_ENV
+        } else {
+          echo "::warning ::Not going to clean up PATH variable on $os"
+        }
+      shell: pwsh
+
+branding:
+  icon: star
+  color: green

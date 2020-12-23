@@ -1,0 +1,99 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+  schedule:
+    # Weekly, at 5:45 AM on Friday (somewhat randomly chosen).
+    - cron: '45 5 * * 5'
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2019, windows-2016]
+        python: [0, 1]
+        default: [0, 1]
+
+        include:
+          # Prettier run names.
+          - {os: windows-2019, name: 2019}
+          - {os: windows-2016, name: 2016}
+          - {default: 0, default_descr: ''}
+          - {default: 1, default_descr: ' + C:\Windows'}
+          - {python: 0, python_descr: ''}
+          - {python: 1, python_descr: ' + setup-python'}
+
+    runs-on: '${{ matrix.os }}'
+
+    name: '${{ matrix.name }}${{ matrix.default_descr }}${{ matrix.python_descr }}'
+
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+        if: matrix.python
+
+      - name: Show %PATH%
+        run: |
+          $env:PATH.Split([IO.Path]::PathSeparator) | %{ echo $_ }
+
+      # There should be plenty of MinGW distributions in PATH, some kind of GCC
+      # should be there.
+      - name: gcc.exe should be found
+        run: |
+          $(Get-Command gcc -ErrorAction SilentlyContinue) -or $(throw "gcc.exe wasn't found!")
+
+      - name: python.exe should be found
+        run: |
+          $(Get-Command python -ErrorAction SilentlyContinue) -or $(throw "python.exe wasn't found!")
+        if: matrix.python
+
+      - name: Clean up PATH
+        uses: ./
+        with:
+          dirs: C:\foo;C:\bar
+          default: '${{ matrix.default }}'
+
+      - name: Show %PATH%
+        run: |
+          $env:PATH.Split([IO.Path]::PathSeparator) | %{ echo $_ }
+
+      - name: gcc.exe shouldn't be found
+        run: |
+          $(Get-Command gcc -ErrorAction SilentlyContinue) -and $(throw "cl.exe was found!")
+
+      # I'm not sure how this works actually.
+      # Do these setup-* actions use a different API?
+      - name: python.exe should _still_ be found
+        run: |
+          $(Get-Command python -ErrorAction SilentlyContinue) -or $(throw "python.exe wasn't found!")
+        if: matrix.python
+
+      - name: Check %PATH%
+        run: |
+          $env:PATH.Split([IO.Path]::PathSeparator) | %{
+              if ($_.StartsWith('C:\Program Files\PowerShell')) {
+                  # Thanks to `shell: pwsh`, C:\Program Files\PowerShell should
+                  # be there.
+              } elseif ('${{ matrix.default }}' -eq '1' -and $_.StartsWith('C:\Windows')) {
+                  # If the default paths are added, they all should start with
+                  # C:\Windows.
+              } elseif ('${{ matrix.python }}' -eq '1' -and $_.Contains('\Python\')) {
+                  # If we're testing w/ setup-python, it should still be there.
+              } elseif ($_ -eq 'C:\foo' -or $_ -eq 'C:\bar') {
+                  # Our custom directories.
+              } else {
+                  throw "Unexpected path: $_"
+              }
+          }
