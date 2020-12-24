@@ -1,4 +1,4 @@
-name: Clean up %PATH%
+name: Clean up PATH
 description: Clean up PATH environment variable on Windows workers
 
 inputs:
