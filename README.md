@@ -10,7 +10,7 @@ the default paths are included.
 Use it in your workflow like this:
 
     - name: Clean up PATH
-      uses: egor-tensin/cleanup-path@v1
+      uses: egor-tensin/cleanup-path@v2
 
 API
 ---
