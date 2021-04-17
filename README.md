@@ -1,7 +1,7 @@
 Clean up PATH
 =============
 
-[![Test](https://github.com/egor-tensin/cleanup-path/workflows/Test/badge.svg)](https://github.com/egor-tensin/cleanup-path/actions?query=workflow%3ATest)
+[![Test](https://github.com/egor-tensin/cleanup-path/actions/workflows/test.yml/badge.svg)](https://github.com/egor-tensin/cleanup-path/actions/workflows/test.yml)
 
 The PATH variable on Windows runners is a cesspool.
 For example, it includes seemingly dozens of MinGW distributions.
