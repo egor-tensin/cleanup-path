@@ -12,15 +12,20 @@ Use it in your workflow like this:
     - name: Clean up PATH
       uses: egor-tensin/cleanup-path@v2
 
+* You can pass additional directory paths to add to PATH using the `dirs`
+parameter.
+* System directories under C:\Windows are added to PATH by default.
+Disable this by setting the `default` parameter to `0`.
+
 API
 ---
 
 | Input   | Value   | Default | Description
 | ------- | ------- | ------- | -----------
-| dirs    | *Empty* | Yes     | No additional paths.
-|         | *Other* | No      | Additional paths, separated by a semicolon (;).
-| default | 1       | Yes     | Add the default directories under C:\Windows.
-|         | *Other* | No      | Don't add the default directories.
+| dirs    | *Empty* | ✓       | No additional paths.
+|         | *Other* |         | Additional paths, separated by a semicolon (;).
+| default | 1       | ✓       | Add the default directories under C:\Windows.
+|         | *Other* |         | Don't add the default directories.
 
 The action sets the PATH environment variable.
 Note that even if you call it with `default: 0` and don't specify any `dirs`,
