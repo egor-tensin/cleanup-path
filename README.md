@@ -3,10 +3,13 @@ Clean up PATH
 
 [![Test](https://github.com/egor-tensin/cleanup-path/actions/workflows/test.yml/badge.svg)](https://github.com/egor-tensin/cleanup-path/actions/workflows/test.yml)
 
+This GitHub action cleans up the PATH variable.
+
 The PATH variable on Windows runners is a cesspool.
 For example, it includes seemingly dozens of MinGW distributions.
 This action takes a page out of MSYS2's book here, and cleans PATH so that only
 the default paths are included.
+
 Use it in your workflow like this:
 
     - name: Clean up PATH
@@ -22,10 +25,10 @@ API
 
 | Input   | Value   | Default | Description
 | ------- | ------- | ------- | -----------
-| dirs    | *Empty* | ✓       | No additional paths.
-|         | *Other* |         | Additional paths, separated by a semicolon (;).
+| dirs    | *empty* | ✓       | No additional paths.
+|         | *any*   |         | Additional paths, separated by a semicolon (;).
 | default | 1       | ✓       | Add the default directories under C:\Windows.
-|         | *Other* |         | Don't add the default directories.
+|         | *any*   |         | Don't add the default directories.
 
 The action sets the PATH environment variable.
 
