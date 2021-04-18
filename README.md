@@ -28,11 +28,23 @@ API
 |         | *Other* |         | Don't add the default directories.
 
 The action sets the PATH environment variable.
-Note that even if you call it with `default: 0` and don't specify any `dirs`,
+
+Notes
+-----
+
+* Even if you call the action with `default: 0` and don't specify any `dirs`,
 it might not clear your PATH completely.
-Actions like `setup-python`, etc. have a way to propagate their values to PATH
-regardless.
+Actions like `setup-python`, etc. seem to have a way to propagate their values
+to PATH regardless.
 Also, your `shell` selection matters.
+* v1 of this action is a simple composite action with the same API.
+At some point, it turned out that restoring PATH value might be desirable in
+the action's `post` stage.
+In particular, the GitHub-provided `cache` action wasn't able to find the `tar`
+executable on windows-2016 images (windows-2019 images have it built-in under
+C:\Windows).
+Composite actions don't support having the `post` stage, so it became a
+JavaScript action.
 
 License
 -------
