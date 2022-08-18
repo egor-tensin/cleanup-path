@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/egor-tensin/cleanup-path",
   "dependencies": {
-    "@actions/core": "^1.2.6"
+    "@actions/core": "^1.9.1"
   }
 }
