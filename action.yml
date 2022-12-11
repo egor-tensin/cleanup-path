@@ -11,7 +11,7 @@ inputs:
     default: 1
 
 runs:
-  using: node12
+  using: node16
   main: clean.js
   post: restore.js
 
