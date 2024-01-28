@@ -13,7 +13,7 @@ the default paths are included.
 Use it in your workflow like this:
 
     - name: Clean up PATH
-      uses: egor-tensin/cleanup-path@v3
+      uses: egor-tensin/cleanup-path@v4
 
 * You can pass additional directory paths to add to PATH using the `dirs`
 parameter.
