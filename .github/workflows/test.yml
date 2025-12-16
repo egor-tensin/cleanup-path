@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, windows-2022, windows-latest]
+        os: [windows-2019, windows-2022, windows-2025, windows-latest]
         python: [0, 1]
         default: [0, 1]
 
@@ -21,6 +21,7 @@ jobs:
           # Prettier run names.
           - {os: windows-2019, name: 2019}
           - {os: windows-2022, name: 2022}
+          - {os: windows-2025, name: 2025}
           - {os: windows-latest, name: latest}
           - {default: 0, default_descr: ''}
           - {default: 1, default_descr: ' + C:\Windows'}
