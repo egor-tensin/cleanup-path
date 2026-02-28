@@ -1,7 +1,7 @@
-const os = require('os');
-const process = require('process');
+import * as os from 'os';
+import * as process from 'process';
 
-const core = require('@actions/core');
+import * as core from '@actions/core';
 
 try {
     if (os.platform != 'win32') {
