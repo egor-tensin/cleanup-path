@@ -3,6 +3,7 @@
   "version": "4.0.2",
   "description": "Clean up PATH on Windows workers",
   "main": "clean.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
