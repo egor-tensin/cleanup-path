@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/egor-tensin/cleanup-path.git"
   },
-  "author": "Egor Tensin <Egor.Tensin@gmail.com>",
+  "author": "Egor Tensin <egor@tensin.name>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/egor-tensin/cleanup-path/issues"
