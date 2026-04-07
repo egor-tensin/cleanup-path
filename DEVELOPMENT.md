@@ -1,3 +1,13 @@
+Releases
+--------
+
+* Check if you need to upgrade the version in package.json.
+* Check if you need to upgrade it in the README.
+* Make a tag the usual way, etc.
+
+Development
+-----------
+
 To upgrade Node dependencies in package-lock.json:
 
     npm upgrade
