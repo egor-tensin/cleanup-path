@@ -1,6 +1,6 @@
 {
   "name": "cleanup-path",
-  "version": "5.0.1",
+  "version": "5.0.3",
   "description": "Clean up PATH on Windows workers",
   "main": "clean.js",
   "type": "module",
