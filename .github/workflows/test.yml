@@ -14,10 +14,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2022, windows-2025, windows-latest]
+        os:
+          - windows-2022
+          - windows-2025
+          - windows-latest
         python: [0, 1]
         default: [0, 1]
-
         include:
           # Prettier run names.
           - {os: windows-2022, name: 2022}
@@ -27,15 +29,11 @@ jobs:
           - {default: 1, default_descr: ' + C:\Windows'}
           - {python: 0, python_descr: ''}
           - {python: 1, python_descr: ' + setup-python'}
-
     runs-on: ${{ matrix.os }}
-
     name: ${{ matrix.name }}${{ matrix.default_descr }}${{ matrix.python_descr }}
-
     defaults:
       run:
         shell: pwsh
-
     steps:
       - name: Checkout
         uses: actions/checkout@v7
