@@ -1,9 +1,16 @@
 Releases
 --------
 
-* Check if you need to upgrade the version in package.json.
-* Check if you need to upgrade it in the README.
-* Make a tag the usual way, etc.
+* Update the version in package.json & package-lock.json using
+
+      npm version --git-tag-version=false patch
+
+    * Instead of `patch`, use `minor` or `major`.
+* Check if you need to update it in the README.
+* Commit changes & make/update the required git tags.
+    * Best done using [tag-release].
+
+[tag-release]: https://github.com/egor-tensin/tag-release
 
 Development
 -----------
