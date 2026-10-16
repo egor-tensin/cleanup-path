@@ -25,10 +25,10 @@ API
 
 | Input   | Value   | Default | Description
 | ------- | ------- | ------- | -----------
-| dirs    | *empty* | ✓       | No additional paths.
-|         | *any*   |         | Additional paths, separated by a semicolon (;).
-| default | 1       | ✓       | Add the default directories under C:\Windows.
-|         | *any*   |         | Don't add the default directories.
+| dirs    | *empty* | ✓       | No additional paths
+|         | *any*   |         | Additional paths, separated by a semicolon (;)
+| default | 1       | ✓       | Add the default directories under C:\Windows
+|         | *any*   |         | Don't add the default directories
 
 The action sets the PATH environment variable.
 
