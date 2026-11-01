@@ -11,7 +11,9 @@ Releases
 so run `npm upgrade` too, I guess?
 * Check if you need to update it in the README.
 * Commit changes & make/update the required git tags.
-    * Best done using [tag-release].
+    * Best done using [tag-release], e.g.:
+
+          tag-release -u -r patch
 
 [tag-release]: https://github.com/egor-tensin/tag-release
 
