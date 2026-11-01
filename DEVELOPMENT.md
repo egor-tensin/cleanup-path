@@ -6,6 +6,9 @@ Releases
       npm version --git-tag-version=false patch
 
     * Instead of `patch`, use `minor` or `major`.
+
+* Idk why, but the version in node_modules is not updated by the command above,
+so run `npm upgrade` too, I guess?
 * Check if you need to update it in the README.
 * Commit changes & make/update the required git tags.
     * Best done using [tag-release].
